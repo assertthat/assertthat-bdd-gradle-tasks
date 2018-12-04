@@ -1,6 +1,8 @@
 import com.assertthat.plugins.internal.APIUtil
 import com.assertthat.plugins.internal.Arguments
 import com.assertthat.plugins.internal.FileUtil
+import org.apache.maven.plugin.MojoExecutionException
+import org.codehaus.jettison.json.JSONException
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
@@ -29,7 +31,7 @@ import org.gradle.api.tasks.TaskAction
  * <p>
  * Created by Glib_Briia on 15/05/2018.
  */
-class FeaturesTask extends DefaultTask {
+class ReportTask extends DefaultTask {
     @Input
     String projectId
     @Input
@@ -49,31 +51,40 @@ class FeaturesTask extends DefaultTask {
     String proxyPassword = null
     @Input
     @Optional
-    String mode = null
+    String runName = null
     @Input
     @Optional
-    String jql = null
+    String jsonReportFolder = null
     @Input
     @Optional
-    String outputFolder = null
+    String jsonReportIncludePattern = null
 
     @TaskAction
-    def downloadFeatures() {
+    def submitReport() {
         Arguments arguments = new Arguments( accessKey,
                                                 secretKey,
                                                 projectId,
+                                                runName,
                                                 null,
-                                                outputFolder,
-                                                null,
-                                                null,
+                                                jsonReportFolder,
+                                                jsonReportIncludePattern,
                                                 proxyURI,
                                                 proxyUsername,
                                                 proxyPassword,
-                                                mode,
-                                                jql);
-        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword())
-        File inZip = apiUtil.download(new File(arguments.getOutputFolder()), mode, jql)
-        File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()))
-        zip.delete()
+                                                null,
+                                                null)
+        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword());
+
+        String[] files = new FileUtil().findJsonFiles(new File(arguments.getJsonReportFolder()), arguments.getJsonReportIncludePattern(), null);
+        Long runid = -1L;
+        for (String f : files) {
+            try {
+                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f);
+            } catch (IOException e) {
+                throw new MojoExecutionException("Failed to upload report", e);
+            } catch (JSONException e) {
+                throw new MojoExecutionException("Failed to upload report", e);
+            }
+        }
     }
 }
