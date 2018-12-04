@@ -1,0 +1,85 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+group 'com.assertthat.plugins'
+archivesBaseName = "assertthat-bdd-gradle-tasks"
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    compile group: 'com.assertthat.plugins', name: 'assertthat-bdd-standalone', version: '1.0-SNAPSHOT'
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: "$System.env.OSSRH_JIRA_USERNAME", password: "$System.env.OSSRH_JIRA_PASSWORD")
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: "$System.env.OSSRH_JIRA_USERNAME", password: "$System.env.OSSRH_JIRA_PASSWORD")
+            }
+
+            pom.project {
+                name 'assertthat-bdd-gradle-tasks'
+                packaging 'jar'
+
+                description 'AssertThat BDD Jira gradle plugin'
+                url 'https://github.com/assertthat/assertthat-bdd-gradle-tasks'
+
+                scm {
+                    connection 'scm:git:https://github.com/assertthat/assertthat-bdd-gradle-tasks.git'
+                    developerConnection 'scm:git:https://github.com/assertthat/assertthat-bdd-gradle-tasks.git'
+                    url 'https://github.com/assertthat/assertthat-bdd-gradle-tasks/'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'http://www.opensource.org/licenses/mit-license.php'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'glib-briia'
+                        name 'Glib Briia'
+                        email 'glib.briia@assertthat.com'
+                    }
+                }
+            }
+        }
+    }
+}
