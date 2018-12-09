@@ -31,16 +31,7 @@ task sourcesJar(type: Jar) {
 }
 
 artifacts {
-    archives javadocJar, sourcesJar
-}
-
-signing {
-    ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
-
-    signing {
-        required { !version.endsWith("SNAPSHOT") && gradle.taskGraph.hasTask("uploadArchives") }
-        sign configurations.archives
-    }
+    archives jar, javadocJar, sourcesJar
 }
 
 uploadArchives {
@@ -87,4 +78,10 @@ uploadArchives {
             }
         }
     }
+}
+
+signing {
+    required { !version.endsWith("SNAPSHOT") && gradle.taskGraph.hasTask("uploadArchives") }
+    useGpgCmd()
+    sign configurations.archives
 }

@@ -1,4 +1,7 @@
 language: java
+sudo: false
+dist: trusty
+
 env:
   global:
     - secure: "WO+wGc4aIQPYZyqZ9GPEl6WQRIl5nkASZ9R0px8m5VRw5Ca4hlB3GqdQccnFnHtxXlTbY56CZGrTNqpDt9ThGeaoCNWer+KXm0ur38F/IIYSpv8AjkN22/vcS/pEX6imIrflv34IO8PWF7hsw8UNgwteYJOTBu6MyF/cM1XLOh7YKj+dXwurVNBRB9mbcaSq/cVV6UySLm4t4i9+2rOb4qGxqjoyqATdOQ2y3sPPkJH5G/p28nwvAn8K4a5IytM4AslGPADSO3Y4oWW4RMmaj8zNjoTOPrIl+7UFuwSFEfel7nny7QPyGoIsLGgG3O5G7m87YnNBs1rqCw9ANKEsW0RZQ0dMBtKa6d/Ju/EFxNYcgipLD+3Pfg7jDHMUJJ4gaxSeRp89w+wJ1yjUohMbUvBgKP7gAGfEorjHxX3kx3cf5jAl7vh3F3CztCrwXYA4uvHeu3X4p8wONrHStKl9U8Xv33uyaIr3Mb10WrWs5nIFrh9Vr1LOz/DunRy6XrJls/p9ARLCJL8DZydt+UO0nprKHeoVqH0/7Mre5d0hjUdz+fjWhtMU0cnh0Xud+KeWY2Zrvr3ElQZVsmo55Qrjr0/AJFw996bGJFMWE4i5NLrrsknbNpHyWoViVv2NJSqxkzSduUvu4vNo9htXIrQ0/S3SSdi9VAdbLSNbYSOzwwA="
@@ -8,6 +11,9 @@ env:
 
 
 script: ./gradlew compileGroovy
+
+install:
+  - true
 
 after_success:
   - ./cd/before-deploy.sh
