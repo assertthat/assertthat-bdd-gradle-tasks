@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 group 'com.assertthat.plugins'
 archivesBaseName = "assertthat-bdd-gradle-tasks"
-version '1.1-SNAPSHOT'
+version '1.1'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -35,8 +35,12 @@ artifacts {
 }
 
 signing {
-    required { gradle.taskGraph.hasTask("uploadArchives") }
-    sign configurations.archives
+    ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+
+    signing {
+        required { !version.endsWith("SNAPSHOT") && gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+    }
 }
 
 uploadArchives {
