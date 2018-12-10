@@ -57,4 +57,4 @@ task submitReport(type: ReportTask){
 
 ### Example project 
 
-Refer to example project for runing using Rake [assertthat-bdd-gradle-example](https://github.com/assertthat/assertthat-bdd-gradle-example)
+Refer to example project [assertthat-bdd-gradle-example](https://github.com/assertthat/assertthat-bdd-gradle-example)
