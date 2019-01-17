@@ -37,7 +37,7 @@ task downloadFeatures(type: FeaturesTask){
     mode = "automated"
     /*Optional - the value MUST be an instance of {@link String} or {@link java.net.URI}.*/
     proxyURI = "myproxy:8080"
-    /*Optional - user name which will be used for proxy authentication.
+    /*Optional - user name which will be used for proxy authentication.*/
     proxyUsername = "username"
     /*Optional - password which will be used for proxy authentication.*/
     proxyPassword = "password"
@@ -58,7 +58,7 @@ task submitReport(type: ReportTask){
     jsonReportIncludePattern = "**/cucumber.json"
     /*Optional - the value MUST be an instance of {@link String} or {@link java.net.URI}.*/
     proxyURI = "myproxy:8080"
-    /*Optional - user name which will be used for proxy authentication.
+    /*Optional - user name which will be used for proxy authentication.*/
     proxyUsername = "username"
     /*Optional - password which will be used for proxy authentication.*/
     proxyPassword = "password"
