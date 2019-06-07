@@ -58,28 +58,32 @@ class ReportTask extends DefaultTask {
     @Input
     @Optional
     String jsonReportIncludePattern = null
+    @Input
+    @Optional
+    String type = null
 
     @TaskAction
     def submitReport() {
-        Arguments arguments = new Arguments( accessKey,
-                                                secretKey,
-                                                projectId,
-                                                runName,
-                                                null,
-                                                jsonReportFolder,
-                                                jsonReportIncludePattern,
-                                                proxyURI,
-                                                proxyUsername,
-                                                proxyPassword,
-                                                null,
-                                                null)
+        Arguments arguments = new Arguments(accessKey,
+                secretKey,
+                projectId,
+                runName,
+                null,
+                jsonReportFolder,
+                jsonReportIncludePattern,
+                proxyURI,
+                proxyUsername,
+                proxyPassword,
+                null,
+                null,
+                type)
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword());
 
         String[] files = new FileUtil().findJsonFiles(new File(arguments.getJsonReportFolder()), arguments.getJsonReportIncludePattern(), null);
         Long runid = -1L;
         for (String f : files) {
             try {
-                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f);
+                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f, type);
             } catch (IOException e) {
                 throw new MojoExecutionException("Failed to upload report", e);
             } catch (JSONException e) {

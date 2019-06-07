@@ -59,18 +59,19 @@ class FeaturesTask extends DefaultTask {
 
     @TaskAction
     def downloadFeatures() {
-        Arguments arguments = new Arguments( accessKey,
-                                                secretKey,
-                                                projectId,
-                                                null,
-                                                outputFolder,
-                                                null,
-                                                null,
-                                                proxyURI,
-                                                proxyUsername,
-                                                proxyPassword,
-                                                mode,
-                                                jql);
+        Arguments arguments = new Arguments(accessKey,
+                secretKey,
+                projectId,
+                null,
+                outputFolder,
+                null,
+                null,
+                proxyURI,
+                proxyUsername,
+                proxyPassword,
+                mode,
+                jql,
+                null);
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword())
         File inZip = apiUtil.download(new File(arguments.getOutputFolder()), mode, jql)
         File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()))
