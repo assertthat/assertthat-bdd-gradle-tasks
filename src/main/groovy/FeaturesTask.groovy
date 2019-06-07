@@ -71,7 +71,7 @@ class FeaturesTask extends DefaultTask {
                 proxyPassword,
                 mode,
                 jql,
-                null);
+                null)
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword())
         File inZip = apiUtil.download(new File(arguments.getOutputFolder()), mode, jql)
         File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()))

@@ -72,7 +72,7 @@ uploadArchives {
                     developer {
                         id 'glib-briia'
                         name 'Glib Briia'
-                        email 'glib.briia@assertthat.com'
+                        email 'glib@assertthat.com'
                     }
                 }
             }
