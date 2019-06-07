@@ -62,6 +62,8 @@ task submitReport(type: ReportTask){
     proxyUsername = "username"
     /*Optional - password which will be used for proxy authentication.*/
     proxyPassword = "password"
+    /*Optional - default cucumber (can be one of: cucumber/karate)*/
+    type = "cucumber"
 }
 
 ```
