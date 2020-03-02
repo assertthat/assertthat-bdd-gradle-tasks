@@ -55,8 +55,8 @@ uploadArchives {
                 url 'https://github.com/assertthat/assertthat-bdd-gradle-tasks'
 
                 scm {
-                    connection 'scm:git:https://github.com/assertthat/assertthat-bdd-gradle-tasks.git'
-                    developerConnection 'scm:git:https://github.com/assertthat/assertthat-bdd-gradle-tasks.git'
+                    connection 'scm:git:git@github.com:assertthat/assertthat-bdd-gradle-tasks.git'
+                    developerConnection 'scm:git:git@github.com:assertthat/assertthat-bdd-gradle-tasks.git'
                     url 'https://github.com/assertthat/assertthat-bdd-gradle-tasks/'
                 }
 
