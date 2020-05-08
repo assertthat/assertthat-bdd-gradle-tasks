@@ -29,6 +29,8 @@ task downloadFeatures(type: FeaturesTask){
     accessKey = "ASSERTTHAT_ACCESS_KEY"
     /*Optional can be supplied as environment variable ASSERTTHAT_SECRET_KEY*/
     secretKey = "ASSERTTHAT_SECRET_KEY"
+    /*Used for jira server integration only. If using cloud remove this option*/
+    jiraServerUrl = "http://mycompanyjira.com"
     /*Optional - default ./features*/
     outputFolder = "src/test/resources"
     /*Optional - all features downloaded by default - should be a valid JQL*/
@@ -50,6 +52,8 @@ task submitReport(type: ReportTask){
     accessKey = "ASSERTTHAT_ACCESS_KEY"
     /*Optional can be supplied as environment variable ASSERTTHAT_SECRET_KEY*/
     secretKey = "ASSERTTHAT_SECRET_KEY"
+    /*Used for jira server integration only. If using cloud remove this option*/
+    jiraServerUrl = "http://mycompanyjira.com"    
     /*The name of the run - default 'Test run dd MMM yyyy HH:mm:ss'*/
     runName = "Dry Tests Run"
     /*Json report folder - default ./reports*/

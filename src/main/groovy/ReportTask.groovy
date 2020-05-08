@@ -61,6 +61,9 @@ class ReportTask extends DefaultTask {
     @Input
     @Optional
     String type = null
+    @Input
+    @Optional
+    String jiraServerUrl = null
 
     @TaskAction
     def submitReport() {
@@ -76,8 +79,9 @@ class ReportTask extends DefaultTask {
                 proxyPassword,
                 null,
                 null,
-                type)
-        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword())
+                type,
+                jiraServerUrl)
+        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl())
 
         String[] files = new FileUtil().findJsonFiles(new File(arguments.getJsonReportFolder()), arguments.getJsonReportIncludePattern(), null)
         Long runid = -1L

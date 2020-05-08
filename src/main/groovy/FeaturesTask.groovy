@@ -56,6 +56,9 @@ class FeaturesTask extends DefaultTask {
     @Input
     @Optional
     String outputFolder = null
+    @Input
+    @Optional
+    String jiraServerUrl = null
 
     @TaskAction
     def downloadFeatures() {
@@ -71,8 +74,9 @@ class FeaturesTask extends DefaultTask {
                 proxyPassword,
                 mode,
                 jql,
-                null)
-        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword())
+                null,
+                jiraServerUrl)
+        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl())
         File inZip = apiUtil.download(new File(arguments.getOutputFolder()), mode, jql)
         File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()))
         zip.delete()
