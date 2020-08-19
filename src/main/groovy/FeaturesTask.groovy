@@ -55,6 +55,9 @@ class FeaturesTask extends DefaultTask {
     String jql = null
     @Input
     @Optional
+    String tags = null
+    @Input
+    @Optional
     String outputFolder = null
     @Input
     @Optional
@@ -74,10 +77,12 @@ class FeaturesTask extends DefaultTask {
                 proxyPassword,
                 mode,
                 jql,
+                tags,
                 null,
                 jiraServerUrl)
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl())
-        File inZip = apiUtil.download(new File(arguments.getOutputFolder()), mode, jql)
+        File inZip = apiUtil.download(new File(arguments.getOutputFolder()),
+                mode, jql, tags)
         File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()))
         zip.delete()
     }
