@@ -18,7 +18,7 @@ Full plugin configuration below, optional properties can be omitted
 ```groovy
 buildscript {
     dependencies{
-        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.4'
+        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.5'
     }
 }
 
@@ -37,6 +37,8 @@ task downloadFeatures(type: FeaturesTask){
     jql = "project = XX AND key in ('XXX-1')"
     /*Optional - default automated (can be one of: manual/automated/both)*/
     mode = "automated"
+    /*Optional - tag expression filter for scenarios. More on tag expressions https://cucumber.io/docs/cucumber/api/#tag-expressions*/
+    tags = "(@smoke or @ui) and (not @slow)"
     /*Optional - the value MUST be an instance of {@link String} or {@link java.net.URI}.*/
     proxyURI = "myproxy:8080"
     /*Optional - user name which will be used for proxy authentication.*/
