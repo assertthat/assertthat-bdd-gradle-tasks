@@ -18,7 +18,7 @@ Full plugin configuration below, optional properties can be omitted
 ```groovy
 buildscript {
     dependencies{
-        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.5'
+        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.6'
     }
 }
 
@@ -45,6 +45,9 @@ task downloadFeatures(type: FeaturesTask){
     proxyUsername = "username"
     /*Optional - password which will be used for proxy authentication.*/
     proxyPassword = "password"
+    /*Optional - prepend ordinal to feature name (default is true)*/   
+    numbered = false
+
 }
 
 task submitReport(type: ReportTask){
@@ -70,6 +73,8 @@ task submitReport(type: ReportTask){
     proxyPassword = "password"
     /*Optional - default cucumber (can be one of: cucumber/karate)*/
     type = "cucumber"
+    /*Optional - Run metadata */
+    metadata="""{"env ":"uat ","build":"456"}"""
 }
 
 ```
