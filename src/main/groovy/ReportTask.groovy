@@ -64,7 +64,6 @@ class ReportTask extends DefaultTask {
     @Input
     @Optional
     String jiraServerUrl = null
-
     @Input
     @Optional
     String metadata = null
@@ -86,7 +85,7 @@ class ReportTask extends DefaultTask {
                 type,
                 jiraServerUrl,
                 metadata,
-        null)
+                true)
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl())
 
         String[] files = new FileUtil().findJsonFiles(new File(arguments.getJsonReportFolder()), arguments.getJsonReportIncludePattern(), null)
@@ -95,9 +94,9 @@ class ReportTask extends DefaultTask {
             try {
                 runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f, type, arguments.getMetadata())
             } catch (IOException e) {
-                throw new MojoExecutionException("Failed to upload report", e);
+                throw new MojoExecutionException("Failed to upload report", e)
             } catch (JSONException e) {
-                throw new MojoExecutionException("Failed to upload report", e);
+                throw new MojoExecutionException("Failed to upload report", e)
             }
         }
     }

@@ -64,7 +64,7 @@ class FeaturesTask extends DefaultTask {
     String jiraServerUrl = null
     @Input
     @Optional
-    String numbered = null
+    Boolean numbered = true
 
     @TaskAction
     def downloadFeatures() {
@@ -83,7 +83,7 @@ class FeaturesTask extends DefaultTask {
                 tags,
                 null,
                 jiraServerUrl,
-        String.valueOf(numbered))
+                numbered)
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl())
         File inZip = apiUtil.download(new File(arguments.getOutputFolder()),
                 mode, jql, tags, arguments.isNumbered())
