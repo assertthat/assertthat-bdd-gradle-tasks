@@ -67,6 +67,9 @@ class ReportTask extends DefaultTask {
     @Input
     @Optional
     String metadata = null
+    @Input
+    @Optional
+    String jql = null
 
     @TaskAction
     def submitReport() {
@@ -81,7 +84,7 @@ class ReportTask extends DefaultTask {
                 proxyUsername,
                 proxyPassword,
                 null,
-                null,
+                jql,
                 type,
                 jiraServerUrl,
                 metadata,
@@ -92,7 +95,7 @@ class ReportTask extends DefaultTask {
         Long runid = -1L
         for (String f : files) {
             try {
-                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f, type, arguments.getMetadata())
+                runid = apiUtil.upload(runid, arguments.getRunName(), arguments.getJsonReportFolder() + f, type, arguments.getMetadata(), arguments.getJql())
             } catch (IOException e) {
                 throw new MojoExecutionException("Failed to upload report", e)
             } catch (JSONException e) {

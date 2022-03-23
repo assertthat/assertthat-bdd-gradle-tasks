@@ -18,7 +18,7 @@ Full plugin configuration below, optional properties can be omitted
 ```groovy
 buildscript {
     dependencies{
-        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.6'
+        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.7'
     }
 }
 
@@ -75,6 +75,8 @@ task submitReport(type: ReportTask){
     type = "cucumber"
     /*Optional - Run metadata */
     metadata="""{"env ":"uat ","build":"456"}"""
+    /*-Optional - all Jira tickets will be updated with test results by default; when JQL is provided only filtered tickets will be updated*/
+    jql = "project = XX AND key in ('XXX-1')"
 }
 
 ```
