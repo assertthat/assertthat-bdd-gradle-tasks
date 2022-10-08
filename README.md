@@ -47,6 +47,8 @@ task downloadFeatures(type: FeaturesTask){
     proxyPassword = "password"
     /*Optional - prepend ordinal to feature name (default is true)*/   
     numbered = false
+    /*Optional - Ignore ssl certificate errors for self-signed certificates (default is false)*/   
+    ignoreCertErrors = true
 
 }
 
@@ -77,6 +79,8 @@ task submitReport(type: ReportTask){
     metadata="""{"env ":"uat ","build":"456"}"""
     /*-Optional - all Jira tickets will be updated with test results by default; when JQL is provided only filtered tickets will be updated*/
     jql = "project = XX AND key in ('XXX-1')"
+    /*Optional - Ignore ssl certificate errors for self-signed certificates (default is false)*/   
+    ignoreCertErrors = true
 }
 
 ```

@@ -70,6 +70,9 @@ class ReportTask extends DefaultTask {
     @Input
     @Optional
     String jql = null
+    @Input
+    @Optional
+    Boolean ignoreCertErrors = false
 
     @TaskAction
     def submitReport() {
@@ -88,8 +91,16 @@ class ReportTask extends DefaultTask {
                 type,
                 jiraServerUrl,
                 metadata,
-                true)
-        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl())
+                true,
+                ignoreCertErrors)
+        APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
+                arguments.getAccessKey(),
+                arguments.getSecretKey(),
+                arguments.getProxyURI(),
+                arguments.getProxyUsername(),
+                arguments.getProxyPassword(),
+                arguments.getJiraServerUrl(),
+                arguments.isIgnoreCertErrors())
 
         String[] files = new FileUtil().findJsonFiles(new File(arguments.getJsonReportFolder()), arguments.getJsonReportIncludePattern(), null)
         Long runid = -1L

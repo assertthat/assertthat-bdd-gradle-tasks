@@ -65,6 +65,9 @@ class FeaturesTask extends DefaultTask {
     @Input
     @Optional
     Boolean numbered = true
+    @Input
+    @Optional
+    Boolean ignoreCertErrors = false
 
     @TaskAction
     def downloadFeatures() {
@@ -83,8 +86,16 @@ class FeaturesTask extends DefaultTask {
                 tags,
                 null,
                 jiraServerUrl,
-                numbered)
-        APIUtil apiUtil = new APIUtil(arguments.getProjectId(), arguments.getAccessKey(), arguments.getSecretKey(), arguments.getProxyURI(), arguments.getProxyUsername(), arguments.getProxyPassword(), arguments.getJiraServerUrl())
+                numbered,
+                ignoreCertErrors)
+        APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
+                arguments.getAccessKey(),
+                arguments.getSecretKey(),
+                arguments.getProxyURI(),
+                arguments.getProxyUsername(),
+                arguments.getProxyPassword(),
+                arguments.getJiraServerUrl(),
+                arguments.isIgnoreCertErrors())
         File inZip = apiUtil.download(new File(arguments.getOutputFolder()),
                 mode, jql, tags, arguments.isNumbered())
         File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()))
