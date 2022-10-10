@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 group 'com.assertthat.plugins'
 archivesBaseName = "assertthat-bdd-gradle-tasks"
-version '1.7'
+version '1.9'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -17,7 +17,7 @@ repositories {
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
-    compile group: 'com.assertthat.plugins', name: 'assertthat-bdd-standalone', version: '1.9.5'
+    compile group: 'com.assertthat.plugins', name: 'assertthat-bdd-standalone', version: '1.9.6'
 }
 
 task javadocJar(type: Jar) {
@@ -82,6 +82,6 @@ uploadArchives {
 
 signing {
     required { !version.endsWith("SNAPSHOT") && gradle.taskGraph.hasTask("uploadArchives") }
-    useGpgCmd()
+    //useGpgCmd()
     sign configurations.archives
 }

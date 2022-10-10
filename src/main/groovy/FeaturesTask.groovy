@@ -1,6 +1,6 @@
-import com.assertthat.plugins.internal.APIUtil
-import com.assertthat.plugins.internal.Arguments
-import com.assertthat.plugins.internal.FileUtil
+import com.assertthat.plugins.standalone.APIUtil
+import com.assertthat.plugins.standalone.ArgumentsFeatures
+import com.assertthat.plugins.standalone.FileUtil
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
@@ -71,23 +71,20 @@ class FeaturesTask extends DefaultTask {
 
     @TaskAction
     def downloadFeatures() {
-        Arguments arguments = new Arguments(accessKey,
+        ArgumentsFeatures arguments = new ArgumentsFeatures(accessKey,
                 secretKey,
                 projectId,
-                null,
                 outputFolder,
-                null,
-                null,
                 proxyURI,
                 proxyUsername,
                 proxyPassword,
                 mode,
                 jql,
                 tags,
-                null,
                 jiraServerUrl,
                 numbered,
                 ignoreCertErrors)
+
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
                 arguments.getAccessKey(),
                 arguments.getSecretKey(),
@@ -96,8 +93,9 @@ class FeaturesTask extends DefaultTask {
                 arguments.getProxyPassword(),
                 arguments.getJiraServerUrl(),
                 arguments.isIgnoreCertErrors())
-        File inZip = apiUtil.download(new File(arguments.getOutputFolder()),
+        File inZip = apiUtil.download(new File(project.projectDir.getCanonicalFile().toURI().resolve(arguments.getOutputFolder()).getPath()),
                 mode, jql, tags, arguments.isNumbered())
+
         File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()))
         zip.delete()
     }

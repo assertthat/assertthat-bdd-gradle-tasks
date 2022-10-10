@@ -1,6 +1,6 @@
-import com.assertthat.plugins.internal.APIUtil
-import com.assertthat.plugins.internal.Arguments
-import com.assertthat.plugins.internal.FileUtil
+import com.assertthat.plugins.standalone.APIUtil
+import com.assertthat.plugins.standalone.ArgumentsReport
+import com.assertthat.plugins.standalone.FileUtil
 import org.apache.maven.plugin.MojoExecutionException
 import org.codehaus.jettison.json.JSONException
 import org.gradle.api.DefaultTask
@@ -76,23 +76,21 @@ class ReportTask extends DefaultTask {
 
     @TaskAction
     def submitReport() {
-        Arguments arguments = new Arguments(accessKey,
+        ArgumentsReport arguments = new ArgumentsReport(accessKey,
                 secretKey,
                 projectId,
                 runName,
-                null,
                 jsonReportFolder,
                 jsonReportIncludePattern,
                 proxyURI,
                 proxyUsername,
                 proxyPassword,
-                null,
                 jql,
                 type,
                 jiraServerUrl,
                 metadata,
-                true,
                 ignoreCertErrors)
+
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
                 arguments.getAccessKey(),
                 arguments.getSecretKey(),
