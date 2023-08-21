@@ -68,6 +68,9 @@ class FeaturesTask extends DefaultTask {
     @Input
     @Optional
     Boolean ignoreCertErrors = false
+    @Input
+    @Optional
+    Boolean cleanupFeatures = true
 
     @TaskAction
     def downloadFeatures() {
@@ -83,7 +86,8 @@ class FeaturesTask extends DefaultTask {
                 tags,
                 jiraServerUrl,
                 numbered,
-                ignoreCertErrors)
+                ignoreCertErrors,
+                cleanupFeatures)
 
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
                 arguments.getAccessKey(),
@@ -94,7 +98,7 @@ class FeaturesTask extends DefaultTask {
                 arguments.getJiraServerUrl(),
                 arguments.isIgnoreCertErrors())
         File inZip = apiUtil.download(new File(project.projectDir.getCanonicalFile().toURI().resolve(arguments.getOutputFolder()).getPath()),
-                mode, jql, tags, arguments.isNumbered())
+                mode, jql, tags, arguments.isNumbered(), arguments.isCleanupFeatures())
 
         File zip = new FileUtil().unpackArchive(inZip, new File(arguments.getOutputFolder()))
         zip.delete()

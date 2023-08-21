@@ -18,7 +18,7 @@ Full plugin configuration below, optional properties can be omitted
 ```groovy
 buildscript {
     dependencies{
-        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.7'
+        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.9.1'
     }
 }
 
@@ -49,7 +49,8 @@ task downloadFeatures(type: FeaturesTask){
     numbered = false
     /*Optional - Ignore ssl certificate errors for self-signed certificates (default is false)*/   
     ignoreCertErrors = true
-
+    /*Optional - Delete features in outputFolder directory before downloading (default is true) */
+    cleanupFeatures = true
 }
 
 task submitReport(type: ReportTask){
@@ -77,7 +78,7 @@ task submitReport(type: ReportTask){
     type = "cucumber"
     /*Optional - Run metadata */
     metadata="""{"env ":"uat ","build":"456"}"""
-    /*-Optional - all Jira tickets will be updated with test results by default; when JQL is provided only filtered tickets will be updated*/
+    /*Optional - all Jira tickets will be updated with test results by default; when JQL is provided only filtered tickets will be updated*/
     jql = "project = XX AND key in ('XXX-1')"
     /*Optional - Ignore ssl certificate errors for self-signed certificates (default is false)*/   
     ignoreCertErrors = true
