@@ -28,8 +28,8 @@ task downloadFeatures(type: FeaturesTask){
     accessKey = "ASSERTTHAT_ACCESS_KEY"
     /*Optional can be supplied as environment variable ASSERTTHAT_SECRET_KEY*/
     secretKey = "ASSERTTHAT_SECRET_KEY"
-    <!--Optional can be supplied as environment variable ASSERTTHAT_TOKEN -->
-    <!-- Jira API token (for DataCenter only) as an alternative to accessKey/secretKey basic auth -->
+    / *Optional can be supplied as environment variable ASSERTTHAT_TOKEN*/
+    /* Jira API token (for DataCenter only) as an alternative to accessKey/secretKey basic auth*/
     token = "ASSERTTHAT_TOKEN"
     /*Used for Jira Server/DataCenter integration only. If using cloud remove this option*/
     jiraServerUrl = "http://mycompanyjira.com"
@@ -62,8 +62,8 @@ task submitReport(type: ReportTask){
     accessKey = "ASSERTTHAT_ACCESS_KEY"
     /*Optional can be supplied as environment variable ASSERTTHAT_SECRET_KEY*/
     secretKey = "ASSERTTHAT_SECRET_KEY"
-    <!--Optional can be supplied as environment variable ASSERTTHAT_TOKEN -->
-    <!-- Jira API token (for DataCenter only) as an alternative to accessKey/secretKey basic auth -->
+    / *Optional can be supplied as environment variable ASSERTTHAT_TOKEN*/
+    /* Jira API token (for DataCenter only) as an alternative to accessKey/secretKey basic auth*/
     token = "ASSERTTHAT_TOKEN"
     /*Used for Jira Server/DataCenter integration only. If using cloud remove this option*/
     jiraServerUrl = "http://mycompanyjira.com"    
