@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/assertthat/assertthat-bdd-maven-plugin.svg?branch=master)](https://travis-ci.org/assertthat/assertthat-bdd-gradle-tasks)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.assertthat.plugins/assertthat-bdd-gradle-tasks/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.assertthat.plugins/assertthat-bdd-gradle-tasks)
 
 ## Description
@@ -18,7 +17,7 @@ Full plugin configuration below, optional properties can be omitted
 ```groovy
 buildscript {
     dependencies{
-        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.9.1'
+        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.9.3'
     }
 }
 
@@ -29,7 +28,10 @@ task downloadFeatures(type: FeaturesTask){
     accessKey = "ASSERTTHAT_ACCESS_KEY"
     /*Optional can be supplied as environment variable ASSERTTHAT_SECRET_KEY*/
     secretKey = "ASSERTTHAT_SECRET_KEY"
-    /*Used for jira server integration only. If using cloud remove this option*/
+    <!--Optional can be supplied as environment variable ASSERTTHAT_TOKEN -->
+    <!-- Jira API token (for DataCenter only) as an alternative to accessKey/secretKey basic auth -->
+    token = "ASSERTTHAT_TOKEN"
+    /*Used for Jira Server/DataCenter integration only. If using cloud remove this option*/
     jiraServerUrl = "http://mycompanyjira.com"
     /*Optional - default ./features*/
     outputFolder = "src/test/resources"
@@ -60,7 +62,10 @@ task submitReport(type: ReportTask){
     accessKey = "ASSERTTHAT_ACCESS_KEY"
     /*Optional can be supplied as environment variable ASSERTTHAT_SECRET_KEY*/
     secretKey = "ASSERTTHAT_SECRET_KEY"
-    /*Used for jira server integration only. If using cloud remove this option*/
+    <!--Optional can be supplied as environment variable ASSERTTHAT_TOKEN -->
+    <!-- Jira API token (for DataCenter only) as an alternative to accessKey/secretKey basic auth -->
+    token = "ASSERTTHAT_TOKEN"
+    /*Used for Jira Server/DataCenter integration only. If using cloud remove this option*/
     jiraServerUrl = "http://mycompanyjira.com"    
     /*The name of the run - default 'Test run dd MMM yyyy HH:mm:ss'*/
     runName = "Dry Tests Run"
