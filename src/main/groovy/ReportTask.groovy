@@ -42,6 +42,9 @@ class ReportTask extends DefaultTask {
     String accessKey = null
     @Input
     @Optional
+    String token = null
+    @Input
+    @Optional
     String proxyURI = null
     @Input
     @Optional
@@ -78,6 +81,7 @@ class ReportTask extends DefaultTask {
     def submitReport() {
         ArgumentsReport arguments = new ArgumentsReport(accessKey,
                 secretKey,
+                token,
                 projectId,
                 runName,
                 jsonReportFolder,
@@ -94,6 +98,7 @@ class ReportTask extends DefaultTask {
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
                 arguments.getAccessKey(),
                 arguments.getSecretKey(),
+                arguments.getToken(),
                 arguments.getProxyURI(),
                 arguments.getProxyUsername(),
                 arguments.getProxyPassword(),

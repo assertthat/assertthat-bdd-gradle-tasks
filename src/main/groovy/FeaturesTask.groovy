@@ -40,6 +40,9 @@ class FeaturesTask extends DefaultTask {
     String accessKey = null
     @Input
     @Optional
+    String token = null
+    @Input
+    @Optional
     String proxyURI = null
     @Input
     @Optional
@@ -76,6 +79,7 @@ class FeaturesTask extends DefaultTask {
     def downloadFeatures() {
         ArgumentsFeatures arguments = new ArgumentsFeatures(accessKey,
                 secretKey,
+                token,
                 projectId,
                 outputFolder,
                 proxyURI,
@@ -92,6 +96,7 @@ class FeaturesTask extends DefaultTask {
         APIUtil apiUtil = new APIUtil(arguments.getProjectId(),
                 arguments.getAccessKey(),
                 arguments.getSecretKey(),
+                arguments.getToken(),
                 arguments.getProxyURI(),
                 arguments.getProxyUsername(),
                 arguments.getProxyPassword(),
