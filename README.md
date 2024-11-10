@@ -17,7 +17,7 @@ Full plugin configuration below, optional properties can be omitted
 ```groovy
 buildscript {
     dependencies{
-        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.9.3'
+        classpath group: 'com.assertthat.plugins', name: 'assertthat-bdd-gradle-tasks', version: '1.9.4'
     }
 }
 
